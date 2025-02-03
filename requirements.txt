@@ -6,4 +6,5 @@ xgboost
 catboost
 dill
 gunicorn
+werkzeug
 -e .
