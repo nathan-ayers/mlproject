@@ -12,3 +12,7 @@ phases:
   post_build:
     commands:
       - docker push 376129840486.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo:latest
+
+artifacts:
+  files:
+    - '**/*'
