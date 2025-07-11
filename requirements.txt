@@ -7,4 +7,3 @@ catboost
 dill
 gunicorn
 werkzeug
--e .

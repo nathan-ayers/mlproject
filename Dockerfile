@@ -1,21 +1,25 @@
-# Use the official Python image (you can use the latest stable version)
+# Use a minimal, official Python runtime
 FROM python:3.8-slim
 
-# Set working directory
+# Set and create working directory
 WORKDIR /app
 
-# Copy all project files including requirements.txt and setup.py
-COPY . .
+# 1) Copy only requirements.txt first for better layer caching
+COPY requirements.txt .
 
-# Install project dependencies
+# 2) Install Python deps
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set environment variables for Flask (if needed)
-ENV FLASK_APP=application.py
-ENV FLASK_ENV=production
+# 3) Copy the rest of your application code
+COPY . .
 
-# Expose port 5000
+# (Optional) Set Flask env vars if you ever run flask directly
+ENV FLASK_APP=application.py \
+    FLASK_ENV=production
+
+# 4) Expose the port your app listens on
 EXPOSE 5000
 
-# Run Gunicorn as the production server
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "application:application"]
+# 5) Start Gunicorn with 2 workers and a 120 s timeout
+CMD ["gunicorn", "application:application", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "120"]
+

@@ -1,1 +1,91 @@
-<h1> Welcome to the home page!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Performance Predictor</title>
+  <style>
+    body { font-family: sans-serif; margin:0; padding:2rem; color:#333; }
+    .container { max-width: 600px; margin:0 auto; }
+    h1 { text-align:center; margin-bottom:0.25em; }
+    .subtitle { text-align:center; color:#555; margin-top:0; }
+    form { display:grid; gap:1rem; margin-top:2rem; }
+    label { display:flex; flex-direction:column; font-weight:600; }
+    input, select { padding:0.5em; font-size:1em; }
+    button { padding:0.75em; background:#007bff; color:#fff; border:none; cursor:pointer; }
+    button:hover { background:#0056b3; }
+    .result { text-align:center; margin-top:2rem; font-size:1.25rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Performance Predictor</h1>
+
+    <form method="post" action="/">
+      <label>
+        Gender
+        <select name="gender">
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+        </select>
+      </label>
+
+      <label>
+        Ethnicity
+        <select name="race_ethnicity">
+          <option value="group A">Group A</option>
+          <option value="group B">Group B</option>
+          <option value="group C">Group C</option>
+          <option value="group D">Group D</option>
+          <option value="group E">Group E</option>
+        </select>
+      </label>
+
+      <label>
+        Parental Education
+        <select name="parental_level_of_education">
+          <option value="some high school">Some high school</option>
+          <option value="high school">High school</option>
+          <option value="some college">Some college</option>
+          <option value="associate's degree">Associate's degree</option>
+          <option value="bachelor's degree">Bachelor's degree</option>
+          <option value="master's degree">Master's degree</option>
+        </select>
+      </label>
+
+      <label>
+        Lunch Type
+        <select name="lunch">
+          <option value="standard">Standard</option>
+          <option value="free/reduced">Free/Reduced</option>
+        </select>
+      </label>
+
+      <label>
+        Test Prep Course
+        <select name="test_preparation_course">
+          <option value="none">None</option>
+          <option value="completed">Completed</option>
+        </select>
+      </label>
+
+      <label>
+        Reading Score
+        <input type="number" name="reading_score" min="0" max="100" required>
+      </label>
+
+      <label>
+        Writing Score
+        <input type="number" name="writing_score" min="0" max="100" required>
+      </label>
+
+      <button type="submit">Predict Final Score</button>
+    </form>
+
+    {% if result is not none %}
+      <div class="result">
+        Predicted Final Exam Score: <strong>{{ result }}</strong>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
